@@ -9,7 +9,7 @@
     "rootDir": "./src",
 
     /* Emit */
-    "outDir": "./out/dist",
+    "outDir": "docs",
     "sourceMap": true,
     "declaration": false,
     "declarationMap": false,
