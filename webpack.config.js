@@ -32,7 +32,7 @@ module.exports = {
         new MiniCssExtractPlugin()
     ],
     output: {
-        path: path.resolve(__dirname, 'out/dist'),
+        path: path.resolve(__dirname, 'docs'),
         filename: '[name].[fullhash:8].js',
         sourceMapFilename: '[name].[fullhash:8].map',
         chunkFilename: '[name].[fullhash:8].js',
@@ -40,14 +40,14 @@ module.exports = {
     },
     devServer: {
         static: {
-            directory: path.join(__dirname, 'out/dist')
+            directory: path.join(__dirname, 'docs')
         },
         client: {
             overlay: true
         },
         compress: true,
         host: '127.0.0.1',
-        port: 8080,
+        port: 3000,
         hot: false,
         watchFiles: ['./src/**/*.ts'],
         liveReload: true,
