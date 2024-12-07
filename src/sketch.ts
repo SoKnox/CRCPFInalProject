@@ -11,7 +11,36 @@ abstract class CatPart {
     abstract draw(x: number, y: number, bodyBrightness?: number): void;
 }
 
-// Ears class
+// Bow class - Maria
+class Bow extends CatPart {
+    draw(x: number, y: number): void {
+        const bowColor = this.p5.color( // Generate random color for bows
+            this.p5.random(100, 255), // Random red
+            this.p5.random(100, 255), // Random green
+            this.p5.random(100, 255)  // Random blue
+        );
+
+        this.p5.fill(bowColor);
+        this.p5.noStroke();
+
+        // Adjust size and proportions for the bow loops
+        const loopWidth = 60;
+        const loopHeight = 40;
+        const knotSize = 30;
+
+        // Draw left loop of bow
+        this.p5.ellipse(x - 40, y - 150, loopWidth, loopHeight);
+
+        // Draw right loop of bow
+        this.p5.ellipse(x + 40, y - 150, loopWidth, loopHeight);
+
+        // Draw center knot
+        this.p5.ellipse(x, y - 150, knotSize, knotSize);
+
+    }
+}
+
+// Ears class - Sophie
 class Ears extends CatPart {
     private earShapes: { points: [number, number][] }[] = [
         { points: [[0, -20], [-15, 20], [15, 20]] }, // Smaller and spaced
@@ -38,7 +67,7 @@ class Ears extends CatPart {
         this.p5.endShape(this.p5.CLOSE);
     }
 }
-// Eyes class
+// Eyes class - Sophie + Maria
 class Eyes extends CatPart {
     private eyeColors: p5.Color[] = [
         this.p5.color(0, 0, this.p5.random(200, 255)), // Blue
@@ -62,7 +91,7 @@ class Eyes extends CatPart {
     }
 }
 
-// Body class
+// Body class - Sophie
 class Body extends CatPart {
     private bodyShapes: { width: number, height: number }[] = [
         { width: 100, height: 200 }, // Skinny
@@ -98,7 +127,7 @@ class Body extends CatPart {
     }
 }
 
-// Nose class
+// Nose class - Maria
 class Nose extends CatPart {
     draw(x: number, y: number): void {
         this.p5.fill(this.p5.color(this.p5.random(200, 255), this.p5.random(100, 150), this.p5.random(150, 200))); // Pink
@@ -106,7 +135,7 @@ class Nose extends CatPart {
     }
 }
 
-// Whiskers class
+// Whiskers class - Maria
 class Whiskers extends CatPart {
     draw(x: number, y: number, bodyBrightness?: number): void {
         const whiskerColor = bodyBrightness && bodyBrightness > 128 ? this.p5.color(0) : this.p5.color(255); // Black for light, white for dark
@@ -123,7 +152,7 @@ class Whiskers extends CatPart {
     }
 }
 
-// Cat class update
+// Cat class update - Maria
 class Cat {
     private parts: CatPart[];
     private body: Body;
@@ -135,7 +164,8 @@ class Cat {
             new Eyes(p5),
             this.body,
             new Nose(p5),
-            new Whiskers(p5)
+            new Whiskers(p5),
+            new Bow(p5)
         ];
     }
 
@@ -148,10 +178,11 @@ class Cat {
         this.parts[1].draw(x, y); // Eyes
         this.parts[3].draw(x, y); // Nose
         this.parts[4].draw(x, y, bodyBrightness); // Whiskers
+        this.parts[5].draw(x, y); // Bow
     }
 }
 
-// Main sketch
+// Main sketch - Maria
 function sketch(p: p5) {
     let cat: Cat;
 

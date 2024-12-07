@@ -7,13 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode development",
     "dev": "webpack serve --mode development --port 3000"
-
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@types/p5": "^1.7.6",
+    "crcp3320-1247-typescript-template": "file:",
     "p5": "^1.11.1"
   },
   "devDependencies": {
