@@ -40,6 +40,58 @@ class Bow extends CatPart {
     }
 }
 
+// Feet class - Maria
+class Feet extends CatPart{
+    draw(x: number, y: number): void {
+        const pawOutlineColor = this.p5.color(0); // Black color for the outline
+        const pawMainColor = this.p5.color(150, 150, 150); // Gray color for the main paw
+        const pawPadColor = this.p5.color(200, 200, 200); // Light gray color for the pads
+
+        // this ensures that the feet are placed relative to the body's bottom
+        const bodyBottomY = y + 120;  // (y position)
+        const footOffset = 50;  // the distance between the feet
+
+        // this draws a single paw
+        const drawPaw = (px: number, py: number) => {
+            this.p5.noStroke();
+            this.p5.fill(pawMainColor);
+
+            // Main paw shape
+            this.p5.beginShape();
+            this.p5.vertex(px, py);
+            this.p5.bezierVertex(px - 20, py - 30, px - 30, py - 20, px - 30, py);
+            this.p5.bezierVertex(px - 30, py + 20, px - 20, py + 30, px, py + 30);
+            this.p5.bezierVertex(px + 20, py + 30, px + 30, py + 20, px + 30, py);
+            this.p5.bezierVertex(px + 30, py - 20, px + 20, py - 30, px, py);
+            this.p5.endShape(this.p5.CLOSE);
+
+            // Paw pads
+            this.p5.fill(pawPadColor);
+            this.p5.ellipse(px - 15, py - 10, 15, 20); // Top left pad
+            this.p5.ellipse(px + 15, py - 10, 15, 20); // Top right pad
+            this.p5.ellipse(px - 5, py + 5, 15, 20); // Middle left pad
+            this.p5.ellipse(px + 5, py + 5, 15, 20); // Middle right pad
+            this.p5.ellipse(px, py + 15, 20, 15); // Bottom pad
+
+            // Outline
+            this.p5.stroke(pawOutlineColor);
+            this.p5.strokeWeight(2);
+            this.p5.noFill();
+            this.p5.beginShape();
+            this.p5.vertex(px, py);
+            this.p5.bezierVertex(px - 20, py - 30, px - 30, py - 20, px - 30, py);
+            this.p5.bezierVertex(px - 30, py + 20, px - 20, py + 30, px, py + 30);
+            this.p5.bezierVertex(px + 20, py + 30, px + 30, py + 20, px + 30, py);
+            this.p5.bezierVertex(px + 30, py - 20, px + 20, py - 30, px, py);
+            this.p5.endShape(this.p5.CLOSE);
+        };
+
+        // places feet below the body
+        drawPaw(x - footOffset, bodyBottomY);  // Draw left foot
+        drawPaw(x + footOffset, bodyBottomY);  // Draw right foot
+    }
+}
+
 // Ears class - Sophie
 class Ears extends CatPart {
     private earShapes: { points: [number, number][] }[] = [
@@ -165,7 +217,8 @@ class Cat {
             this.body,
             new Nose(p5),
             new Whiskers(p5),
-            new Bow(p5)
+            new Bow(p5),  
+            new Feet(p5)
         ];
     }
 
@@ -179,6 +232,7 @@ class Cat {
         this.parts[3].draw(x, y); // Nose
         this.parts[4].draw(x, y, bodyBrightness); // Whiskers
         this.parts[5].draw(x, y); // Bow
+        this.parts[6].draw(x, y); // Feet
     }
 }
 
