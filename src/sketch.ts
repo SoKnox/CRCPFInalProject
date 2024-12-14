@@ -403,6 +403,7 @@ function sketch(p: p5) {
         p.createCanvas(500, 500);
         regenerateCat(p);
         drawFrame(p, frameX, frameY);
+        drawText(p); // Draw the text
     };
 
     p.draw = () => {
@@ -414,25 +415,42 @@ function sketch(p: p5) {
         const noseX = p.width / 2;
         const noseY = p.height - 150 + 80;
         const d = p.dist(p.mouseX, p.mouseY, noseX, noseY);
-        if (d < 40) { // Checks if the click is within the nose 
+        if (d < 40) { // Checks if the click is within the nose
             regenerateCat(p);
             drawFrame(p, frameX, frameY);
+            drawText(p); // Draw the text
         }
     };
 
     // Sophie
     function regenerateCat(p: p5) {
         cat = new Cat(p);
-        p.background(p.random(200, 255), p.random(200, 255), p.random(200, 255)); 
-        cat.draw(p.width / 2, p.height - 150); 
-        cat.changeFrameColor(); 
+        p.background(p.random(200, 255), p.random(200, 255), p.random(200, 255));
+        cat.draw(p.width / 2, p.height - 150);
+        cat.changeFrameColor();
     }
 
     function drawFrame(p: p5, x: number, y: number) {
         cat.drawFrame(p, x, y);
     }
+
+    function drawText(p: p5) {
+        p.textAlign(p.CENTER, p.TOP);
+        p.textSize(16);
+        p.fill(0);
+        p.textFont('Arial');
+        p.textStyle(p.NORMAL); 
+        p.text("CLICK NOSE", p.width / 2, 10);
+        p.textSize(16);
+        p.textStyle(p.NORMAL); 
+        p.text("This project generates a random cat with various features and colors.", p.width / 2, 30);
+    }
+    
+    
+    
 }
 
 new p5(sketch);
+
 
 
